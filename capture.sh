@@ -1,6 +1,6 @@
 #Author: Nick Novotny
 
-#Date: December 2015
+#Date: December 2019
 
 #Name: Forenzix Investigation Script to start and automate the investigation Script for bash (using qemu).
 
@@ -105,12 +105,11 @@ date | tee -a $casename
 sha256sum ${devices[$disk-1]} | tee -a $casename
 date | tee -a $casename
 
-#capture disk using d3dd at the bit level
+#capture disk using dd at the bit level
 echo "Now capturing the evidence disk..." | tee -a $casename
 date | tee -a $casename
-dc3dd hash=md5 hash=sha1 hash=sha256 if=${devices[$disk-1]} of=capture.raw
-
-
+#dc3dd hash=md5 hash=sha1 hash=sha256 if=${devices[$disk-1]} of=capture.raw
+dd if=${devices[$disk-1]} of=capture.raw status=progress
 #echo disk captured, $hash_value
 
 #echo "Capture process completed." | tee -a $casename
@@ -149,6 +148,8 @@ date | tee -a $casename
 echo "Capture completed." | tee -a $casename
 date | tee -a $casename
 
+echo "Captures SHA512 hash value:" | tee -a $casename
+date | tee -a $casename
 
 echo "Do you wish to continue to the vmdk conversion and verification process now?(CAUTION: this process will take several hours) (y/N)"
 read answer
@@ -163,7 +164,7 @@ then
 echo "true"
 
 
-./virtualize.sh
+vlz
 
 
 fi
