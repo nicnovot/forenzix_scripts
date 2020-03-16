@@ -5,6 +5,13 @@
 #Built to add Forenzix functionalityto Debian-based Operating Systems.
 
 #Only tested on Kali Linux.
+#In recent years, Kali has come without the proper repositories defined.  Define the
+#repositories, you may have to run the following command before installing (retreived from
+#https://computingforgeeks.com/add-kali-linux-official-repositories-to-sources-list/)
+#sudo tee -a /etc/apt/sources.list<<EOF
+#deb http://http.kali.org/kali kali-rolling main non-free contrib
+#deb-src http://http.kali.org/kali kali-rolling main non-free contrib
+#EOF
 
 #Add the chain for INetSim
 sudo wget -O - http://www.inetsim.org/inetsim.org-archive-signing-key.asc | apt-key add -
