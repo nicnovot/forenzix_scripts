@@ -105,10 +105,10 @@ date | tee -a $casename
 sha256sum ${devices[$disk-1]} | tee -a $casename
 date | tee -a $casename
 
-#capture disk using d3dd at the bit level
+#capture disk using dd at the bit level
 echo "Now capturing the evidence disk..." | tee -a $casename
 date | tee -a $casename
-dc3dd hash=md5 hash=sha1 hash=sha256 if=${devices[$disk-1]} of=capture.raw
+dd bs=1 if=${devices[$disk-1]} of=capture.raw status=progress
 
 
 #echo disk captured, $hash_value
@@ -138,17 +138,26 @@ echo "Capture completed." | tee -a $casename
 date | tee -a $casename
 
 
-echo "Captures SHA1 hash value:" | tee -a $casename
+echo "Captured SHA1 hash value:" | tee -a $casename
 date | tee -a $casename
 sha1sum capture.raw | tee -a $casename
 date | tee -a $casename
 
-
-echo "Captures SHA256 hash value:" | tee -a $casename
+echo "Captured SHA256 hash value:" | tee -a $casename
+sha256sum capture.raw | tee -a $casename
 date | tee -a $casename
 echo "Capture completed." | tee -a $casename
 date | tee -a $casename
 
+#Get SHA512 Hash Value of Evidence
+echo "Captured SHA512 hash value:" | tee -a $casename
+date | tee -a $casename
+sha512sum capture.raw | tee -a $casename
+date | tee -a $casename
+sha512sum capture.raw | tee -a $casename
+date | tee -a $casename
+echo "Capture completed." | tee -a $casename
+date | tee -a $casename
 
 echo "Do you wish to continue to the vmdk conversion and verification process now?(CAUTION: this process will take several hours) (y/N)"
 read answer
