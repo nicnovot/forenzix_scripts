@@ -17,7 +17,8 @@ sudo echo "deb http://www.inetsim.org/debian/ binary/" >> /etc/apt/sources.list
 
 sudo apt-get update
 
-sudo apt-get install qemu -y
+#There is no need for QEMU since VBoxManage is faster to convert the raw disk image(s) to vmdk format
+#sudo apt-get install qemu -y
 
 sudo apt-get install dkms -y
 
